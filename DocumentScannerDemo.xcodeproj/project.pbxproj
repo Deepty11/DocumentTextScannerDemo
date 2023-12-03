@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		158D220A2B1C5C4400486AB4 /* DocumentInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D22092B1C5C4400486AB4 /* DocumentInputViewController.swift */; };
+		158D22122B1CEAD800486AB4 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158D22102B1CEAD800486AB4 /* ImageCell.swift */; };
+		158D22132B1CEAD800486AB4 /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 158D22112B1CEAD800486AB4 /* ImageCell.xib */; };
 		159DB2D52B17173C00DF412C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2D42B17173C00DF412C /* AppDelegate.swift */; };
 		159DB2D72B17173C00DF412C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2D62B17173C00DF412C /* SceneDelegate.swift */; };
 		159DB2D92B17173C00DF412C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2D82B17173C00DF412C /* ViewController.swift */; };
@@ -16,6 +19,7 @@
 		159DB2EC2B17173E00DF412C /* DocumentScannerDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2EB2B17173E00DF412C /* DocumentScannerDemoTests.swift */; };
 		159DB2F62B17173E00DF412C /* DocumentScannerDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2F52B17173E00DF412C /* DocumentScannerDemoUITests.swift */; };
 		159DB2F82B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2F72B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift */; };
+		159DB3062B185EA900DF412C /* CustomInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB3052B185EA900DF412C /* CustomInputViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		158D22092B1C5C4400486AB4 /* DocumentInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentInputViewController.swift; sourceTree = "<group>"; };
+		158D22102B1CEAD800486AB4 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		158D22112B1CEAD800486AB4 /* ImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 		159DB2D12B17173C00DF412C /* DocumentScannerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DocumentScannerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		159DB2D42B17173C00DF412C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		159DB2D62B17173C00DF412C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +56,7 @@
 		159DB2F12B17173E00DF412C /* DocumentScannerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DocumentScannerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		159DB2F52B17173E00DF412C /* DocumentScannerDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerDemoUITests.swift; sourceTree = "<group>"; };
 		159DB2F72B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		159DB3052B185EA900DF412C /* CustomInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		158D220B2B1C959000486AB4 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				158D22102B1CEAD800486AB4 /* ImageCell.swift */,
+				158D22112B1CEAD800486AB4 /* ImageCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		159DB2C82B17173C00DF412C = {
 			isa = PBXGroup;
 			children = (
@@ -99,9 +116,10 @@
 		159DB2D32B17173C00DF412C /* DocumentScannerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				158D220B2B1C959000486AB4 /* Cell */,
+				159DB3042B185E8800DF412C /* Presentation */,
 				159DB2D42B17173C00DF412C /* AppDelegate.swift */,
 				159DB2D62B17173C00DF412C /* SceneDelegate.swift */,
-				159DB2D82B17173C00DF412C /* ViewController.swift */,
 				159DB2DA2B17173C00DF412C /* Main.storyboard */,
 				159DB2DD2B17173E00DF412C /* Assets.xcassets */,
 				159DB2DF2B17173E00DF412C /* LaunchScreen.storyboard */,
@@ -125,6 +143,16 @@
 				159DB2F72B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift */,
 			);
 			path = DocumentScannerDemoUITests;
+			sourceTree = "<group>";
+		};
+		159DB3042B185E8800DF412C /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				159DB2D82B17173C00DF412C /* ViewController.swift */,
+				159DB3052B185EA900DF412C /* CustomInputViewController.swift */,
+				158D22092B1C5C4400486AB4 /* DocumentInputViewController.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				159DB2E12B17173E00DF412C /* LaunchScreen.storyboard in Resources */,
+				158D22132B1CEAD800486AB4 /* ImageCell.xib in Resources */,
 				159DB2DE2B17173E00DF412C /* Assets.xcassets in Resources */,
 				159DB2DC2B17173C00DF412C /* Main.storyboard in Resources */,
 			);
@@ -258,9 +287,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				159DB3062B185EA900DF412C /* CustomInputViewController.swift in Sources */,
 				159DB2D92B17173C00DF412C /* ViewController.swift in Sources */,
+				158D220A2B1C5C4400486AB4 /* DocumentInputViewController.swift in Sources */,
 				159DB2D52B17173C00DF412C /* AppDelegate.swift in Sources */,
 				159DB2D72B17173C00DF412C /* SceneDelegate.swift in Sources */,
+				158D22122B1CEAD800486AB4 /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +477,7 @@
 				DEVELOPMENT_TEAM = A2KT8CVF73;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DocumentScannerDemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "DocumentScannerDemo needs camera permission to scan.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -473,6 +506,7 @@
 				DEVELOPMENT_TEAM = A2KT8CVF73;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DocumentScannerDemo/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "DocumentScannerDemo needs camera permission to scan.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
