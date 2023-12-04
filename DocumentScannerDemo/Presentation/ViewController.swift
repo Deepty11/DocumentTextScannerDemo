@@ -41,6 +41,11 @@ class ViewController: UIViewController {
         setSubViews()
         
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewDidTapped)))
+    }
+    
+    @objc private func viewDidTapped() {
+        textField.resignFirstResponder()
     }
     
     @objc private func buttonTapped() {
@@ -85,8 +90,8 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
             images.append(scan.imageOfPage(at: pageNumber))
         }
         
-        documentInputViewController.images = images
-        documentInputViewController.reloadInputViews()
+//        documentInputViewController.images = images
+//        documentInputViewController.reloadInputViews()
         
         controller.dismiss(animated: true)
     }

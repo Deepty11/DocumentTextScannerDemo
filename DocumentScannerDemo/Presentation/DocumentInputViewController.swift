@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import VisionKit
 
 class DocumentInputViewController: UIInputViewController {
+    var analyzer = ImageAnalyzer()
+    var interaction = ImageAnalysisInteraction()
     var images: [UIImage] = [] {
         didSet {
             collectionView.reloadData()
@@ -27,6 +30,10 @@ class DocumentInputViewController: UIInputViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        images = [UIImage(named: "image1")!,
+                  UIImage(named: "image2")!,
+                  UIImage(named: "image3")!,
+                  UIImage(named: "image4")!]
         addCollectionView()
     }
     
@@ -57,13 +64,18 @@ class DocumentInputViewController: UIInputViewController {
     }
     
     private func createSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1)))
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)))
+        
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1)),
+                heightDimension: .absolute(300)),
             repeatingSubitem: item,
             count: 1)
+        
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: 4,
@@ -89,6 +101,5 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
         cell.setImage(image: images[indexPath.row])
         return cell
     }
-    
     
 }
