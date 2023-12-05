@@ -21,7 +21,6 @@ class DocumentInputViewController: UIInputViewController {
     lazy var collectionView: UICollectionView = {
         let cV = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         cV.register(UINib(nibName: ImageCell.identifier, bundle: nil), forCellWithReuseIdentifier: ImageCell.identifier)
-        cV.backgroundColor = .gray
         cV.dataSource = self
         cV.delegate = self
         
@@ -110,8 +109,6 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
     func configureLiveTextInteraction(for image: UIImage) {
         Task {
             let configuration = ImageAnalyzer.Configuration([.text])
-            
-            //guard let image = image else { return }
             
             do {
                 let analysis = try await analyzer.analyze(image, configuration: configuration)
