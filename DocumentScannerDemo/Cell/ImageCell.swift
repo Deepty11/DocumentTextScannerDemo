@@ -11,11 +11,15 @@ import VisionKit
 class ImageCell: UICollectionViewCell {
     static let identifier = "ImageCell"
     
-    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var zoomableView: ZoomableImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        cellImageView.layer.cornerRadius = 10
+        zoomableView.layer.cornerRadius = 10
+    }
+    
+    func configureView(with image: UIImage) {
+        zoomableView.imageView.image = image
     }
 }

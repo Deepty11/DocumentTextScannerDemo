@@ -20,6 +20,7 @@
 		159DB2F62B17173E00DF412C /* DocumentScannerDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2F52B17173E00DF412C /* DocumentScannerDemoUITests.swift */; };
 		159DB2F82B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB2F72B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift */; };
 		159DB3062B185EA900DF412C /* CustomInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159DB3052B185EA900DF412C /* CustomInputViewController.swift */; };
+		FAFBFE9D2B1F27860037D443 /* ZoomableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFBFE9C2B1F27860037D443 /* ZoomableImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		159DB2F52B17173E00DF412C /* DocumentScannerDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerDemoUITests.swift; sourceTree = "<group>"; };
 		159DB2F72B17173E00DF412C /* DocumentScannerDemoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerDemoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		159DB3052B185EA900DF412C /* CustomInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputViewController.swift; sourceTree = "<group>"; };
+		FAFBFE9C2B1F27860037D443 /* ZoomableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		159DB2D32B17173C00DF412C /* DocumentScannerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				FAFBFE992B1F27590037D443 /* View */,
 				158D220B2B1C959000486AB4 /* Cell */,
 				159DB3042B185E8800DF412C /* Presentation */,
 				159DB2D42B17173C00DF412C /* AppDelegate.swift */,
@@ -153,6 +156,14 @@
 				158D22092B1C5C4400486AB4 /* DocumentInputViewController.swift */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		FAFBFE992B1F27590037D443 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FAFBFE9C2B1F27860037D443 /* ZoomableImageView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,6 +302,7 @@
 				159DB2D92B17173C00DF412C /* ViewController.swift in Sources */,
 				158D220A2B1C5C4400486AB4 /* DocumentInputViewController.swift in Sources */,
 				159DB2D52B17173C00DF412C /* AppDelegate.swift in Sources */,
+				FAFBFE9D2B1F27860037D443 /* ZoomableImageView.swift in Sources */,
 				159DB2D72B17173C00DF412C /* SceneDelegate.swift in Sources */,
 				158D22122B1CEAD800486AB4 /* ImageCell.swift in Sources */,
 			);

@@ -100,18 +100,18 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
-        cell.cellImageView.image = images[indexPath.row]
-        cell.cellImageView.addInteraction(interaction)
-        configureLiveTextInteraction(for: cell)
+        cell.configureView(with: images[indexPath.row])
+        cell.zoomableView.imageView.addInteraction(interaction)
+        configureLiveTextInteraction(for: images[indexPath.row])
         
         return cell
     }
     
-    func configureLiveTextInteraction(for cell: ImageCell) {
+    func configureLiveTextInteraction(for image: UIImage) {
         Task {
             let configuration = ImageAnalyzer.Configuration([.text])
             
-            guard let image = cell.cellImageView.image else { return }
+            //guard let image = image else { return }
             
             do {
                 let analysis = try await analyzer.analyze(image, configuration: configuration)

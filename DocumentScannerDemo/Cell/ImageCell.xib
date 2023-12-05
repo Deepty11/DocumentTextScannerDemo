@@ -16,21 +16,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="403" height="99"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="px3-Fr-IqN">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvD-g9-sTq" customClass="ZoomableImageView" customModule="DocumentScannerDemo" customModuleProvider="target">
                         <rect key="frame" x="4" y="2" width="395" height="95"/>
-                    </imageView>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="px3-Fr-IqN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="DXi-NA-k3y"/>
-                <constraint firstItem="px3-Fr-IqN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="Ily-fY-lFW"/>
-                <constraint firstAttribute="trailing" secondItem="px3-Fr-IqN" secondAttribute="trailing" constant="4" id="cJ3-J0-SGM"/>
-                <constraint firstAttribute="bottom" secondItem="px3-Fr-IqN" secondAttribute="bottom" constant="2" id="xTM-mA-XwW"/>
+                <constraint firstItem="bvD-g9-sTq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="7IA-1f-Nzb"/>
+                <constraint firstAttribute="bottom" secondItem="bvD-g9-sTq" secondAttribute="bottom" constant="2" id="HFw-lc-eqa"/>
+                <constraint firstItem="bvD-g9-sTq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="M70-MY-Pnf"/>
+                <constraint firstAttribute="trailing" secondItem="bvD-g9-sTq" secondAttribute="trailing" constant="4" id="caX-Pt-jhF"/>
             </constraints>
             <size key="customSize" width="403" height="99"/>
             <connections>
-                <outlet property="cellImageView" destination="px3-Fr-IqN" id="17D-sX-eEH"/>
+                <outlet property="zoomableView" destination="bvD-g9-sTq" id="WOp-XI-vSF"/>
             </connections>
             <point key="canvasLocation" x="364.12213740458014" y="5.9859154929577469"/>
         </collectionViewCell>
