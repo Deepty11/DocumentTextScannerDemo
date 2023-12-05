@@ -22,26 +22,35 @@ class ViewController: UIViewController {
         return button
     }()
     
-    let label: UILabel = {
-        let label = UILabel()
-        label.text = "Scan your Doc"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
-    }()
-    
     var textField: UITextField = {
         let textField = UITextField()
+        textField.borderStyle = .roundedRect
         textField.placeholder = "write something"
         return textField
+    }()
+    
+    var bar: UIToolbar = {
+        let bar = UIToolbar()
+        let resetButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.2.swap"),
+                                          style: .done,
+                                          target: ViewController.self,
+                                          action: #selector(swapInputView))
+        bar.items = [resetButton]
+        bar.sizeToFit()
+        
+        return bar
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setSubViews()
         
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewDidTapped)))
+        button.addTarget(self, 
+                         action: #selector(buttonTapped),
+                         for: .touchUpInside)
+        view.addGestureRecognizer(
+            UITapGestureRecognizer(target: self,
+                                   action: #selector(viewDidTapped)))
     }
     
     @objc private func viewDidTapped() {
@@ -54,14 +63,37 @@ class ViewController: UIViewController {
         present(scannerViewController, animated: true)
     }
     
+    @objc private func swapInputView() {
+        let previousInputView = textField.inputView
+        textField.inputView = nil
+        textField.resignFirstResponder()
+        
+        if previousInputView == documentInputViewController.view {
+            textField.becomeFirstResponder()
+        } else {
+            textField.inputView = documentInputViewController.view
+        }
+    }
+    
+    private func addToolBar() {
+        let bar = UIToolbar()
+        let resetButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.2.swap"),
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(swapInputView))
+        bar.items = [resetButton]
+        bar.sizeToFit()
+        
+        textField.inputAccessoryView = bar
+    }
+    
     private func setSubViews() {
         view.addSubview(button)
-        view.addSubview(label)
         view.addSubview(textField)
         
-        //textField.inputView = customInputView.view
         textField.inputView = documentInputViewController.view
-        label.translatesAutoresizingMaskIntoConstraints = false
+        addToolBar()
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         textField.translatesAutoresizingMaskIntoConstraints = false
 
@@ -69,12 +101,7 @@ class ViewController: UIViewController {
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            textField.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -10),
-            
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            label.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            label.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -10),
-            
+            textField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -40),
             
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
@@ -90,8 +117,7 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
             images.append(scan.imageOfPage(at: pageNumber))
         }
         
-//        documentInputViewController.images = images
-//        documentInputViewController.reloadInputViews()
+        documentInputViewController.images.append(contentsOf: images)
         
         controller.dismiss(animated: true)
     }

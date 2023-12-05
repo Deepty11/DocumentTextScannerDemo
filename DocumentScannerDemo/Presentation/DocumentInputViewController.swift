@@ -69,9 +69,9 @@ class DocumentInputViewController: UIInputViewController {
                 widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1)))
         
-        let group = NSCollectionLayoutGroup.vertical(
+        let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .absolute(UIScreen.main.bounds.width),
                 heightDimension: .absolute(300)),
             repeatingSubitem: item,
             count: 1)
@@ -82,6 +82,8 @@ class DocumentInputViewController: UIInputViewController {
             leading: 4,
             bottom: 4,
             trailing: 4)
+        
+        section.orthogonalScrollingBehavior = .groupPagingCentered
         
         return section
     }
@@ -98,8 +100,29 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         
-        cell.setImage(image: images[indexPath.row])
+        cell.cellImageView.image = images[indexPath.row]
+        cell.cellImageView.addInteraction(interaction)
+        configureLiveTextInteraction(for: cell)
+        
         return cell
+    }
+    
+    func configureLiveTextInteraction(for cell: ImageCell) {
+        Task {
+            let configuration = ImageAnalyzer.Configuration([.text])
+            
+            guard let image = cell.cellImageView.image else { return }
+            
+            do {
+                let analysis = try await analyzer.analyze(image, configuration: configuration)
+                
+                interaction.analysis = analysis
+                interaction.preferredInteractionTypes = .textSelection
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
     }
     
 }
