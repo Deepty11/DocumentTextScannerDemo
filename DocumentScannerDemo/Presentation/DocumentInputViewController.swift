@@ -71,8 +71,8 @@ class DocumentInputViewController: UIInputViewController {
         
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(UIScreen.main.bounds.width),
-                heightDimension: .absolute(300)),
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)),
             repeatingSubitem: item,
             count: 1)
         

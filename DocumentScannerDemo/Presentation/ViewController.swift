@@ -68,11 +68,11 @@ class ViewController: UIViewController {
         textField.inputView = nil
         textField.resignFirstResponder()
         
-        if previousInputView == documentInputViewController.view {
-            textField.becomeFirstResponder()
-        } else {
+        if !(previousInputView == documentInputViewController.view) {
             textField.inputView = documentInputViewController.view
         }
+        
+        textField.becomeFirstResponder()
     }
     
     private func addToolBar() {
