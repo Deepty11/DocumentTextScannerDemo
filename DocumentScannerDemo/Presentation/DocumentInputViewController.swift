@@ -34,6 +34,8 @@ class DocumentInputViewController: UIInputViewController {
                   UIImage(named: "image3")!,
                   UIImage(named: "image4")!]
         addCollectionView()
+        
+        interaction.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +117,7 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
                 
                 interaction.analysis = analysis
                 interaction.preferredInteractionTypes = .textSelection
+                writeToTextField(text: interaction.selectedText)
             } catch {
                 print(error.localizedDescription)
             }
@@ -122,4 +125,16 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
         }
     }
     
+    func writeToTextField(text: String) {
+        textDocumentProxy.insertText(text)
+    }
+    
+}
+
+extension DocumentInputViewController: ImageAnalysisInteractionDelegate {
+    func textSelectionDidChange(_ interaction: ImageAnalysisInteraction) {
+        print("Selected Text:\(interaction.selectedText)")
+        print("Selected Text range:\(interaction.selectedRanges)")
+        writeToTextField(text: interaction.selectedText)
+    }
 }

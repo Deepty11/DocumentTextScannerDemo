@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     var documentInputViewController = DocumentInputViewController()
     
     var images: [UIImage] = []
+    var textFields: [UITextField] = []
+    
     let button: UIButton = {
         let button = UIButton()
         button.setTitle("Scan Document", for: .normal)
@@ -20,13 +22,6 @@ class ViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         return button
-    }()
-    
-    var textField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "write something"
-        return textField
     }()
     
     var bar: UIToolbar = {
@@ -40,6 +35,8 @@ class ViewController: UIViewController {
         
         return bar
     }()
+    
+    let numberOfTextFields = 3
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +51,7 @@ class ViewController: UIViewController {
     }
     
     @objc private func viewDidTapped() {
-        textField.resignFirstResponder()
+        view.endEditing(true)
     }
     
     @objc private func buttonTapped() {
@@ -64,18 +61,24 @@ class ViewController: UIViewController {
     }
     
     @objc private func swapInputView() {
-        let previousInputView = textField.inputView
-        textField.inputView = nil
-        textField.resignFirstResponder()
-        
-        if !(previousInputView == documentInputViewController.view) {
-            textField.inputView = documentInputViewController.view
+        for i in 0..<numberOfTextFields {
+            let textField = textFields[i]
+            if textField.isEditing {
+                let previousInputView = textField.inputView
+                textField.inputView = nil
+                textField.resignFirstResponder()
+                
+                if !(previousInputView == documentInputViewController.view) {
+                    textField.inputView = documentInputViewController.view
+                }
+                
+                textField.becomeFirstResponder()
+            }
         }
         
-        textField.becomeFirstResponder()
     }
     
-    private func addToolBar() {
+    private func getToolBar() -> UIToolbar {
         let bar = UIToolbar()
         let resetButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.2.swap"),
                                           style: .done,
@@ -84,24 +87,41 @@ class ViewController: UIViewController {
         bar.items = [resetButton]
         bar.sizeToFit()
         
-        textField.inputAccessoryView = bar
+        return bar
+    }
+    
+    private func addTextFields() {
+        for i in 0..<numberOfTextFields {
+            let tf = UITextField()
+            tf.borderStyle = .roundedRect
+            tf.placeholder = "write something"
+            tf.inputView = documentInputViewController.view
+            tf.inputAccessoryView = getToolBar()
+            tf.tag = i
+            
+            textFields.append(tf)
+        }
     }
     
     private func setSubViews() {
         view.addSubview(button)
-        view.addSubview(textField)
         
-        textField.inputView = documentInputViewController.view
-        addToolBar()
+        addTextFields()
+        let stackView = UIStackView(arrangedSubviews: textFields)
+        stackView.distribution = .fillEqually
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        
+        view.addSubview(stackView)
         
         button.translatesAutoresizingMaskIntoConstraints = false
-        textField.translatesAutoresizingMaskIntoConstraints = false
+        stackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            textField.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -40),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            stackView.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -40),
             
             button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
