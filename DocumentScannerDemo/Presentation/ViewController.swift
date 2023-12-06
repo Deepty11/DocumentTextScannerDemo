@@ -8,6 +8,10 @@
 import UIKit
 import VisionKit
 
+protocol InputViewDelegate: AnyObject {
+    func addText(text: String)
+}
+
 class ViewController: UIViewController {
     var customInputView = CustomInputViewController()
     var documentInputViewController = DocumentInputViewController()
@@ -37,6 +41,7 @@ class ViewController: UIViewController {
     }()
     
     let numberOfTextFields = 3
+    var selectedTextFieldTag = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +53,7 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self,
                                    action: #selector(viewDidTapped)))
+        documentInputViewController.delegate = self
     }
     
     @objc private func viewDidTapped() {
@@ -98,6 +104,7 @@ class ViewController: UIViewController {
             tf.inputView = documentInputViewController.view
             tf.inputAccessoryView = getToolBar()
             tf.tag = i
+            tf.delegate = self
             
             textFields.append(tf)
         }
@@ -131,6 +138,7 @@ class ViewController: UIViewController {
     }
 }
 
+//MARK: - VNDocumentCameraViewControllerDelegate
 extension ViewController: VNDocumentCameraViewControllerDelegate {
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
         for pageNumber in 0..<scan.pageCount {
@@ -148,6 +156,21 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         debugPrint(error.localizedDescription)
+    }
+}
+
+//MARK: - InputViewDelegate
+extension ViewController: InputViewDelegate {
+    func addText(text: String) {
+        textFields[selectedTextFieldTag].text = text
+    }
+}
+
+
+//MARK: - UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        selectedTextFieldTag = textField.tag
     }
 }
 
