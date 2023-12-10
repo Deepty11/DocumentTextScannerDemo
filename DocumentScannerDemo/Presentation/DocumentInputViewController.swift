@@ -12,7 +12,7 @@ import VisionKit
 class DocumentInputViewController: UIInputViewController {
     var analyzer = ImageAnalyzer()
     var interaction = ImageAnalysisInteraction()
-    weak var delegate: InputViewDelegate?
+    var onSelectText: ((String) -> Void)? = nil
     
     var images: [UIImage] = [] {
         didSet {
@@ -135,9 +135,7 @@ extension DocumentInputViewController: UICollectionViewDelegate, UICollectionVie
 
 extension DocumentInputViewController: ImageAnalysisInteractionDelegate {
     func textSelectionDidChange(_ interaction: ImageAnalysisInteraction) {
-        print("Selected Text:\(interaction.selectedText)")
-        print("Selected Text range:\(interaction.selectedRanges)")
-        delegate?.addText(text: interaction.selectedText)
+        onSelectText?(interaction.selectedText)
     }
 }
 

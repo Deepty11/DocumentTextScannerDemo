@@ -8,10 +8,6 @@
 import UIKit
 import VisionKit
 
-protocol InputViewDelegate: AnyObject {
-    func addText(text: String)
-}
-
 class ViewController: UIViewController {
     var customInputView = CustomInputViewController()
     var documentInputViewController = DocumentInputViewController()
@@ -53,7 +49,6 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(
             UITapGestureRecognizer(target: self,
                                    action: #selector(viewDidTapped)))
-        documentInputViewController.delegate = self
     }
     
     @objc private func viewDidTapped() {
@@ -102,6 +97,20 @@ class ViewController: UIViewController {
             tf.borderStyle = .roundedRect
             tf.placeholder = "write something"
             tf.inputView = documentInputViewController.view
+            documentInputViewController.onSelectText =  { [weak self] text in
+                guard let self else { return }
+                
+                if !text.isEmpty {
+                    self.textFields[self.selectedTextFieldTag].text = text
+                    self.textFields[self.selectedTextFieldTag].resignFirstResponder()
+                    selectedTextFieldTag += 1
+                    
+                    if selectedTextFieldTag <= numberOfTextFields - 1 {
+                        self.textFields[selectedTextFieldTag].becomeFirstResponder()
+                    }
+                }
+            }
+            
             tf.inputAccessoryView = getToolBar()
             tf.tag = i
             tf.delegate = self
@@ -156,13 +165,6 @@ extension ViewController: VNDocumentCameraViewControllerDelegate {
     
     func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFailWithError error: Error) {
         debugPrint(error.localizedDescription)
-    }
-}
-
-//MARK: - InputViewDelegate
-extension ViewController: InputViewDelegate {
-    func addText(text: String) {
-        textFields[selectedTextFieldTag].text = text
     }
 }
 
